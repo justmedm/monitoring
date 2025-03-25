@@ -53,21 +53,30 @@ while ($row = mysqli_fetch_assoc($status_result)) {
     <title>Current Sit-in Records</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom colors using Tailwind's @apply directive */
+        .bg-dark-blue { background-color: #2A3735; }
+        .text-light-pink { color: #ABAAAA; }
+        .bg-light-pink { background-color: #ABAAAA; }
+        .text-dark-green { color: #3A3A3A; }
+        .bg-light-gray { background-color: #C3BCC2; }
+        .border-gray { border-color: #494D49; }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-light-gray text-dark-green">
     <!-- Navigation Bar -->
-    <div class="bg-blue-800 text-white p-4 flex justify-between">
-        <h1 class="text-lg">CCS Admin</h1>
-        <div>
-            <a href="admin_dashboard.php" class="px-3">Home</a>
-            <button onclick="openSearchModal()" class="px-3">Search</button>
-            <a href="stud_list.php" class="px-3">Students</a>
-            <a href="currentSitin.php" class="px-3">Sit-in</a>
-            <a href="sitin_record.php" class="px-3">View Sit-in Records</a>
-            <a href="sit_in_reports.php" class="px-3">Sit-in Reports</a>
-            <a href="feedback.php" class="px-3">Feedback Reports</a>
-            <a href="reservation.php" class="px-3">Reservation</a>
-            <a href="logout.php" class="bg-yellow-500 text-black px-3 py-1 rounded">Log out</a>
+    <div class="bg-dark-blue text-white p-4 flex justify-between items-center shadow-md">
+        <h1 class="text-2xl font-bold">CCS Admin</h1>
+        <div class="flex items-center space-x-4">
+            <a href="admin_dashboard.php" class="hover:underline text-light-pink">Home</a>
+            <button onclick="openSearchModal()" class="hover:underline text-light-pink">Search Students</button>
+            <a href="stud_list.php" class="hover:underline text-light-pink">Students</a>
+            <a href="currentSitin.php" class="hover:underline text-light-pink">Sit-in</a>
+            <a href="sitin_record.php" class="hover:underline text-light-pink">View Sit-in Records</a>
+            <a href="sit_in_reports.php" class="hover:underline text-light-pink">Sit-in Reports</a>
+            <a href="feedback.php" class="hover:underline text-light-pink">Feedback Reports</a>
+            <a href="reservation.php" class="hover:underline text-light-pink">Reservation</a>
+            <a href="login.php" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Log out</a>
         </div>
     </div>
 

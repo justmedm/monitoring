@@ -28,44 +28,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['announcement'])) {
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Custom colors using Tailwind's @apply directive */
+        .bg-dark-blue { background-color: #2A3735; }
+        .text-light-pink { color: #ABAAAA; }
+        .bg-light-pink { background-color: #ABAAAA; }
+        .text-dark-green { color: #3A3A3A !important; }
+        .bg-light-gray { background-color: #C3BCC2 !important; }
+        .border-gray { border-color: #494D49; }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <!-- Navbar -->
-    <div class="bg-black text-white p-4 flex justify-between">
-        <h1 class="text-lg">CCS Admin</h1>
-        <div>
-            <a href="index.php" class="px-3">Home</a>
-            <button onclick="openSearchModal()" class="px-3">Search Students</button>
-            <a href="stud_list.php" class="px-3">Students</a>
-            <a href="currentSitin.php" class="px-3">Sit-in</a>
-            <a href="sitin_record.php" class="px-3">View Sit-in Records</a>
-            <a href="sit_in_reports.php" class="px-3">Sit-in Reports</a>
-            <a href="feedback.php" class="px-3">Feedback Reports</a>
-            <a href="reservation.php" class="px-3">Reservation</a>
-            <a href="logout.php" class="bg-red-500 text-white px-3 py-1 rounded">Log out</a>
+<body class="bg-light-gray text-dark-green">
+    <!-- Navigation Bar -->
+    <div class="bg-dark-blue text-white p-4 flex justify-between items-center shadow-md">
+        <h1 class="text-2xl font-bold">CCS Admin</h1>
+        <div class="flex items-center space-x-4">
+            <a href="admin_dashboard.php" class="hover:underline text-light-pink">Home</a>
+            <button onclick="openSearchModal()" class="hover:underline text-light-pink">Search Students</button>
+            <a href="stud_list.php" class="hover:underline text-light-pink">Students</a>
+            <a href="currentSitin.php" class="hover:underline text-light-pink">Sit-in</a>
+            <a href="sitin_record.php" class="hover:underline text-light-pink">View Sit-in Records</a>
+            <a href="sit_in_reports.php" class="hover:underline text-light-pink">Sit-in Reports</a>
+            <a href="feedback.php" class="hover:underline text-light-pink">Feedback Reports</a>
+            <a href="reservation.php" class="hover:underline text-light-pink">Reservation</a>
+            <a href="../logout.php" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Log out</a>
         </div>
     </div>
 
-    <div class="flex p-4">
-        <!-- Statistics -->
-        <div class="w-1/2 p-4 bg-white shadow rounded">
-            <h2 class="bg-black text-white p-2 rounded">📊 Statistics</h2>
-            <p><strong>Students Registered:</strong> 180</p>
-            <p><strong>Currently Sit-in:</strong> 0</p>
-            <p><strong>Total Sit-in:</strong> 79</p>
-            <canvas id="statsChart"></canvas>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Statistics Section -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-bold text-blue-800 mb-4">📊 Statistics</h2>
+            <div class="space-y-2">
+                <p><strong>Students Registered:</strong> <span class="text-blue-600">180</span></p>
+                <p><strong>Currently Sit-in:</strong> <span class="text-green-600">0</span></p>
+                <p><strong>Total Sit-in:</strong> <span class="text-yellow-600">79</span></p>
+            </div>
+            <canvas id="statsChart" class="mt-4"></canvas>
         </div>
 
-        <!-- Announcements -->
-        <div class="w-1/2 p-4 bg-white shadow rounded">
-            <h2 class="bg-black text-white p-2 rounded">📢 Announcements</h2>
-            <form action="announcement.php" method="POST">
-                <textarea name="announcement" class="w-full border p-2" placeholder="New Announcement"></textarea>
-                <button type="submit" class="bg-green-500 text-white px-3 py-1 mt-2 rounded">Submit</button>
+        <!-- Announcements Section -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-bold text-blue-800 mb-4">📢 Announcements</h2>
+            <form action="announcement.php" method="POST" class="space-y-4">
+                <textarea name="announcement" class="w-full border border-gray-300 p-2 rounded" placeholder="New Announcement"></textarea>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Submit</button>
             </form>
 
-            <h3 class="font-bold mt-4">Posted Announcements</h3>
-            <ul id="announcementsList"></ul>
+            <h3 class="text-lg font-bold mt-6">Posted Announcements</h3>
+            <ul id="announcementsList" class="mt-4 space-y-2">
+                <!-- Announcements will be dynamically loaded here -->
+            </ul>
         </div>
     </div>
 
@@ -90,9 +104,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['announcement'])) {
                 let list = "";
                 announcements.forEach(announcement => {
                     list += `
-                        <li class="p-2 border-b">
-                            <strong>CCS Admin | ${announcement.date}</strong>
-                            <p>${announcement.message}</p>
+                        <li class="p-2 border-b border-gray-300">
+                            <strong class="text-blue-800">CCS Admin | ${announcement.date}</strong>
+                            <p class="text-gray-700">${announcement.message}</p>
                         </li>`;
                 });
                 $("#announcementsList").html(list);

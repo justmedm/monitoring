@@ -62,81 +62,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'search') {
     exit();
 }
 
-// Check if this is an AJAX request for session data
-if (isset($_GET['action']) && $_GET['action'] == 'fetch_session') {
-    if (!isset($_SESSION['username'])) {
-        http_response_code(401);
-        echo json_encode(["error" => "Unauthorized"]);
-        exit();
-    }
-
-    $username = $_SESSION['username'];
-
-    // Fetch user ID
-    $user_sql = "SELECT id FROM users WHERE username = ?";
-    $user_stmt = $conn->prepare($user_sql);
-    $user_stmt->bind_param("s", $username);
-    $user_stmt->execute();
-    $user_result = $user_stmt->get_result();
-    $user = $user_result->fetch_assoc();
-
-    if (!$user) {
-        http_response_code(404);
-        echo json_encode(["error" => "User not found"]);
-        exit();
-    }
-
-    $student_id = $user['id'];
-
-    // Fetch the latest session data for the user
-    $session_sql = "SELECT session, status FROM sit_in_records WHERE student_id = ? AND status = 'Ongoing' ORDER BY stt_id DESC LIMIT 1";
-    $session_stmt = $conn->prepare($session_sql);
-    $session_stmt->bind_param("s", $student_id);
-    $session_stmt->execute();
-    $session_result = $session_stmt->get_result();
-    $session_data = $session_result->fetch_assoc();
-
-    echo json_encode($session_data);
-    exit();
-}
-
-// Check if this is a form submission to add a new sit-in record
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_sitin'])) {
-    $student_id = $_POST['student_id'];
-    $name = $_POST['name'];
-    $purpose = $_POST['purpose'];
-    $lab = $_POST['lab'];
-    $session = $_POST['session'];
-
-    // Check if the user already has an ongoing sit-in record
-    $check_sql = "SELECT * FROM sit_in_records WHERE student_id = ? AND status = 'Ongoing'";
-    $check_stmt = $conn->prepare($check_sql);
-    $check_stmt->bind_param("s", $student_id);
-    $check_stmt->execute();
-    $check_result = $check_stmt->get_result();
-
-    if ($check_result->num_rows > 0) {
-        // If a record exists, prevent duplicate entry
-        $_SESSION['error_message'] = "This user already has an ongoing sit-in session.";
-        header("Location: currentSitin.php");
-        exit();
-    }
-
-    // If no record exists, insert a new one
-    $insert_sql = "INSERT INTO sit_in_records (student_id, name, purpose, lab, session, status) VALUES (?, ?, ?, ?, ?, 'Ongoing')";
-    $insert_stmt = $conn->prepare($insert_sql);
-    $insert_stmt->bind_param("sssss", $student_id, $name, $purpose, $lab, $session);
-
-    if ($insert_stmt->execute()) {
-        $_SESSION['success_message'] = "Sit-in session added successfully.";
-    } else {
-        $_SESSION['error_message'] = "Failed to add sit-in session.";
-    }
-
-    header("Location: currentSitin.php");
-    exit();
-}
-
 // Fetch all sit-in records for initial page load
 $query = "SELECT * FROM sit_in_records ORDER BY stt_id DESC";
 $result = mysqli_query($conn, $query);
@@ -149,52 +74,30 @@ $result = mysqli_query($conn, $query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Sit In</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        // Function to search students dynamically
-        function searchStudent() {
-    const searchQuery = document.getElementById('searchInput').value;
-
-    // Send an AJAX request to the server
-    fetch(`currentSitin.php?action=search&query=${encodeURIComponent(searchQuery)}`)
-        .then(response => response.text())
-        .then(data => {
-            // Clear the existing table body
-            document.getElementById('sitInTable').innerHTML = '';
-
-            // Update the table body with the search results
-            document.getElementById('sitInTable').innerHTML = data;
-        })
-        .catch(error => console.error('Error fetching search results:', error));
-}
-
-        // Function to refresh the table every 10 seconds
-        function refreshTable() {
-            fetch('currentSitin.php?action=fetch')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('sitInTable').innerHTML = data;
-                });
-        }
-
-        // Refresh every 10 seconds
-        setInterval(refreshTable, 10000);
-    </script>
+ <style>
+        /* Custom colors using Tailwind's @apply directive */
+        .bg-dark-blue { background-color: #2A3735; }
+        .text-light-pink { color: #ABAAAA; }
+        .bg-light-pink { background-color: #ABAAAA; }
+        .text-dark-green { color: #3A3A3A; }
+        .bg-light-gray { background-color: #C3BCC2; }
+        .border-gray { border-color: #494D49; }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-light-gray text-dark-green">
     <!-- Navigation Bar -->
-    <div class="bg-blue-800 text-white p-4 flex justify-between">
-        <h1 class="text-lg">CCS Admin</h1>
-        <div>
-            <a href="admin_dashboard.php" class="px-3">Home</a>
-            <button onclick="openSearchModal()" class="px-3">Search Students</button>
-            <a href="stud_list.php" class="px-3">Students</a>
-            <a href="currentSitin.php" class="px-3">Sit-in</a>
-            <a href="sitin_record.php" class="px-3">View Sit-in Records</a>
-            <a href="sit_in_reports.php" class="px-3">Sit-in Reports</a>
-            <a href="feedback.php" class="px-3">Feedback Reports</a>
-            <a href="reservation.php" class="px-3">Reservation</a>
-            <a href="logout.php" class="bg-yellow-500 text-black px-3 py-1 rounded">Log out</a>
+    <div class="bg-dark-blue text-white p-4 flex justify-between items-center shadow-md">
+        <h1 class="text-2xl font-bold">CCS Admin</h1>
+        <div class="flex items-center space-x-4">
+            <a href="admin_dashboard.php" class="hover:underline text-light-pink">Home</a>
+            <button onclick="openSearchModal()" class="hover:underline text-light-pink">Search Students</button>
+            <a href="stud_list.php" class="hover:underline text-light-pink">Students</a>
+            <a href="currentSitin.php" class="hover:underline text-light-pink">Sit-in</a>
+            <a href="sitin_record.php" class="hover:underline text-light-pink">View Sit-in Records</a>
+            <a href="sit_in_reports.php" class="hover:underline text-light-pink">Sit-in Reports</a>
+            <a href="feedback.php" class="hover:underline text-light-pink">Feedback Reports</a>
+            <a href="reservation.php" class="hover:underline text-light-pink">Reservation</a>
+            <a href="login.php" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Log out</a>
         </div>
     </div>
 
@@ -267,13 +170,6 @@ $result = mysqli_query($conn, $query);
                     ?>
                 </tbody>
             </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-center mt-4 space-x-2">
-            <button class="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">&lt;</button>
-            <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">1</button>
-            <button class="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">&gt;</button>
         </div>
     </div>
 </body>

@@ -52,7 +52,25 @@ if (isset($_GET['query'])) {
 
     if ($result->num_rows > 0) {
         $student = $result->fetch_assoc();
-        echo json_encode($student); // Return student data in JSON format
+
+        // Fetch the most recent sit-in record for the student
+        $session_sql = "SELECT session FROM sit_in_records 
+                        WHERE student_id = ? 
+                        ORDER BY stt_id DESC 
+                        LIMIT 1"; // Fetch the latest record
+        $session_stmt = $conn->prepare($session_sql);
+        $session_stmt->bind_param("s", $student['idno']);
+        $session_stmt->execute();
+        $session_result = $session_stmt->get_result();
+        $session_data = $session_result->fetch_assoc();
+
+        // Default remaining sessions to 0 if no records are found
+        $remaining_sessions = $session_data['session'] ?? 0;
+
+        // Add remaining sessions to the response
+        $student['remaining_sessions'] = $remaining_sessions;
+
+        echo json_encode($student); // Return student data with remaining sessions
         exit;
     } else {
         echo json_encode(["error" => "Student not found."]);
@@ -124,7 +142,6 @@ if (isset($_GET['query'])) {
                 
                 <label><strong>Remaining Sessions:</strong></label>
                 <input type="number" id="session" name="session" class="w-full p-2 border" readonly>
-
                 <!-- Buttons -->
                 <div class="mt-4 flex justify-end">
                     <button type="button" onclick="closeSitInModal()" class="bg-gray-500 text-white px-3 py-1 rounded mr-2">Close</button>
@@ -162,7 +179,7 @@ if (isset($_GET['query'])) {
                         // Fill input fields
                         document.getElementById("idno").value = data.idno;
                         document.getElementById("name").value = data.firstname + " " + data.middlename + " " + data.lastname;
-                        document.getElementById("session").value = "30"; // Default session count
+                        document.getElementById("session").value = data.remaining_sessions; // Set remaining sessions
 
                         // Show sit-in form modal
                         document.getElementById("sitInModal").classList.remove("hidden");

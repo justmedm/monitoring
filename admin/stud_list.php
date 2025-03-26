@@ -14,6 +14,7 @@ if (isset($_SESSION['error_message'])) {
 
 // Database connection
 include '../db.php';
+include 'search.php';
 
 // Handle AJAX search requests
 if (isset($_GET['action']) && $_GET['action'] === 'search') {
@@ -34,20 +35,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'search') {
     // Generate the table rows dynamically
     if ($search_result->num_rows > 0) {
         while ($row = $search_result->fetch_assoc()) {
+            $student_id = $row['idno'];
+
+            // Fetch the session count from the sit_in_records table
+            $session_query = "SELECT SUM(session) AS total_sessions FROM sit_in_records WHERE student_id = ?";
+            $session_stmt = $conn->prepare($session_query);
+            $session_stmt->bind_param("s", $student_id);
+            $session_stmt->execute();
+            $session_result = $session_stmt->get_result();
+            $session_row = $session_result->fetch_assoc();
+            $total_sessions = $session_row['total_sessions'] ?? 0;
+
+            // Output the table row with the correct columns
             echo "<tr>
                     <td class='border p-2 text-center'>{$row['idno']}</td>
                     <td class='border p-2 text-center'>{$row['lastname']}, {$row['firstname']} {$row['middlename']}</td>
                     <td class='border p-2 text-center'>{$row['course']}</td>
                     <td class='border p-2 text-center'>{$row['yearlevel']}</td>
                     <td class='border p-2 text-center'>{$row['email']}</td>
+                    <td class='border p-2 text-center'>{$total_sessions}</td>
                     <td class='border p-2 text-center'>
-                        <a href='edit_student.php?id={$row['id']}' class='bg-blue-500 text-white px-2 py-1 rounded'>Edit</a>
-                        <a href='delete_student.php?id={$row['id']}' class='bg-red-500 text-white px-2 py-1 rounded' onclick='return confirm(\"Are you sure you want to delete this student?\")'>Delete</a>
+                        <a href='edit_student.php?id={$row['id']}' class='bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600'>Edit</a>
+                        <a href='delete_student.php?id={$row['id']}' class='bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600' onclick='return confirm(\"Are you sure you want to delete this student?\")'>Delete</a>
                     </td>
                 </tr>";
         }
     } else {
-        echo "<tr><td colspan='6' class='border p-2 text-center text-gray-500 italic'>No matching students found</td></tr>";
+        echo "<tr><td colspan='7' class='border p-2 text-center text-gray-500 italic'>No matching students found</td></tr>";
     }
 
     $search_stmt->close();

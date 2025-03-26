@@ -17,6 +17,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['announcement'])) {
         exit();
     }
 }
+
+// Fetch statistics
+$students_registered = 0;
+$current_sitins = 0;
+$total_sitins = 0;
+
+// Fetch total students registered
+$result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
+if ($row = mysqli_fetch_assoc($result)) {
+    $students_registered = $row['total'];
+}
+
+// Fetch currently sit-in students
+$result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM sit_in_records WHERE status = 'Ongoing'");
+if ($row = mysqli_fetch_assoc($result)) {
+    $current_sitins = $row['total'];
+}
+
+// Fetch total sit-ins
+$result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM sit_in_records");
+if ($row = mysqli_fetch_assoc($result)) {
+    $total_sitins = $row['total'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,9 +84,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['announcement'])) {
         <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-xl font-bold text-blue-800 mb-4">📊 Statistics</h2>
             <div class="space-y-2">
-                <p><strong>Students Registered:</strong> <span class="text-blue-600">180</span></p>
-                <p><strong>Currently Sit-in:</strong> <span class="text-green-600">0</span></p>
-                <p><strong>Total Sit-in:</strong> <span class="text-yellow-600">79</span></p>
+                <p><strong>Students Registered:</strong> <span class="text-blue-600"><?php echo $students_registered; ?></span></p>
+                <p><strong>Currently Sit-in:</strong> <span class="text-green-600"><?php echo $current_sitins; ?></span></p>
+                <p><strong>Total Sit-in:</strong> <span class="text-yellow-600"><?php echo $total_sitins; ?></span></p>
             </div>
             <canvas id="statsChart" class="mt-4"></canvas>
         </div>

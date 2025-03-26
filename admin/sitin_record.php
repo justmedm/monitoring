@@ -2,7 +2,6 @@
 // Start session
 session_start();
 
-
 if (isset($_SESSION['success_message'])) {
     echo "<script>alert('" . $_SESSION['success_message'] . "');</script>";
     unset($_SESSION['success_message']);
@@ -16,32 +15,22 @@ if (isset($_SESSION['error_message'])) {
 // Database connection
 include '../db.php';
 
-// Fetch data for the table
-$query = "SELECT stt_id, student_id, name, purpose, lab, created_at, logged_out, logout_time FROM sit_in_records ORDER BY stt_id DESC";
-$result = mysqli_query($conn, $query);
+// Handle AJAX request to fetch all updated sit-in records
+if (isset($_POST['action']) && $_POST['action'] === 'fetch_all_records') {
+    $query = "SELECT stt_id, student_id, name, purpose, lab, created_at, logged_out, logout_time 
+              FROM sit_in_records 
+              ORDER BY stt_id DESC";
+    $result = mysqli_query($conn, $query);
 
-// Debugging: Check if query executed successfully
-if (!$result) {
-    error_log("⚠️ WARNING: Query failed: " . mysqli_error($conn));
-    die("Error: Could not fetch data.");
-}
+    $records = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $records[] = $row;
+        }
+    }
 
-// Fetch data for the statistics (pie charts)
-$lab_data = [];
-$status_data = [];
-
-// Fetch lab distribution
-$lab_query = "SELECT lab, COUNT(*) as count FROM sit_in_records GROUP BY lab";
-$lab_result = mysqli_query($conn, $lab_query);
-while ($row = mysqli_fetch_assoc($lab_result)) {
-    $lab_data[$row['lab']] = $row['count'];
-}
-
-// Fetch status distribution
-$status_query = "SELECT status, COUNT(*) as count FROM sit_in_records GROUP BY status";
-$status_result = mysqli_query($conn, $status_query);
-while ($row = mysqli_fetch_assoc($status_result)) {
-    $status_data[$row['status']] = $row['count'];
+    echo json_encode(['success' => true, 'data' => $records]);
+    exit();
 }
 ?>
 
@@ -52,7 +41,6 @@ while ($row = mysqli_fetch_assoc($status_result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Sit-in Records</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom colors using Tailwind's @apply directive */
         .bg-dark-blue { background-color: #2A3735; }
@@ -62,6 +50,59 @@ while ($row = mysqli_fetch_assoc($status_result)) {
         .bg-light-gray { background-color: #C3BCC2; }
         .border-gray { border-color: #494D49; }
     </style>
+    <script>
+        // Function to fetch and update all sit-in records automatically
+        function fetchAllRecords() {
+            // Send an AJAX request to fetch all updated sit-in records
+            fetch('sitin_record.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=fetch_all_records',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Clear the existing table rows
+                    const tableBody = document.getElementById('recordTable');
+                    tableBody.innerHTML = '';
+
+                    // Populate the table with the updated data
+                    data.data.forEach(record => {
+                        const loginTime = record.created_at ? new Date(record.created_at).toLocaleTimeString() : 'N/A';
+                        const logoutTime = record.logout_time ? new Date(record.logout_time).toLocaleTimeString() : 'N/A';
+                        const date = record.created_at ? new Date(record.created_at).toLocaleDateString() : 'N/A';
+
+                        const row = `
+                            <tr>
+                                <td class='border p-2 text-center'>${record.stt_id}</td>
+                                <td class='border p-2 text-center'>${record.student_id}</td>
+                                <td class='border p-2 text-center'>${record.name}</td>
+                                <td class='border p-2 text-center'>${record.purpose}</td>
+                                <td class='border p-2 text-center'>${record.lab}</td>
+                                <td class='border p-2 text-center'>${loginTime}</td>
+                                <td class='border p-2 text-center'>${logoutTime}</td>
+                                <td class='border p-2 text-center'>${date}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    console.error('Failed to fetch sit-in records.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Fetch the data every 5 seconds
+        setInterval(fetchAllRecords, 5000);
+
+        // Fetch the data immediately on page load
+        fetchAllRecords();
+    </script>
 </head>
 <body class="bg-light-gray text-dark-green">
     <!-- Navigation Bar -->
@@ -84,21 +125,6 @@ while ($row = mysqli_fetch_assoc($status_result)) {
     <div class="max-w-6xl mx-auto mt-6 p-4 bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-semibold text-center mb-4">Current Sit-in Records</h2>
 
-        <!-- Statistics Section -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <!-- Lab Distribution Chart -->
-            <div class="bg-white p-4 shadow-md rounded-md">
-                <h3 class="text-lg font-semibold text-center mb-2">Lab Distribution</h3>
-                <canvas id="labChart" ></canvas>
-            </div>
-
-            <!-- Status Distribution Chart -->
-            <div class="bg-white p-4 shadow-md rounded-md">
-                <h3 class="text-lg font-semibold text-center mb-2">Status Distribution</h3>
-                <canvas id="statusChart"></canvas>
-            </div>
-        </div>
-
         <!-- Data Table -->
         <div class="overflow-x-auto">
             <table class="w-full border-collapse border border-gray-300">
@@ -114,75 +140,11 @@ while ($row = mysqli_fetch_assoc($status_result)) {
                         <th class="border p-2">Date</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // Debugging: Log the fetched logout_time value
-                            error_log("DEBUG: Fetched logout_time for student_id {$row['student_id']}: " . $row['logout_time']);
-
-                            $login_time = isset($row['created_at']) ? date('h:i A', strtotime($row['created_at'])) : 'N/A';
-                            $logout_time = isset($row['logout_time']) && $row['logout_time'] !== null ? date('h:i A', strtotime($row['logout_time'])) : 'N/A';
-                            $date = isset($row['created_at']) ? date('Y-m-d', strtotime($row['created_at'])) : 'N/A';
-
-                            echo "<tr>
-                                    <td class='border p-2 text-center'>{$row['stt_id']}</td>
-                                    <td class='border p-2 text-center'>{$row['student_id']}</td>
-                                    <td class='border p-2 text-center'>{$row['name']}</td>
-                                    <td class='border p-2 text-center'>{$row['purpose']}</td>
-                                    <td class='border p-2 text-center'>{$row['lab']}</td>
-                                    <td class='border p-2 text-center'>{$login_time}</td>
-                                    <td class='border p-2 text-center'>{$logout_time}</td>
-                                    <td class='border p-2 text-center'>{$date}</td>
-                                </tr>";
-                        }
-                    } else {
-                        echo "<tr><td class='border p-2 text-center text-gray-500' colspan='8'>No records found</td></tr>";
-                    }
-                    mysqli_close($conn);
-                    ?>
+                <tbody id="recordTable">
+                    <!-- Rows will be populated dynamically -->
                 </tbody>
             </table>
         </div>
     </div>
-
-    <!-- Chart.js Script -->
-    <script>
-        // Lab Distribution Chart
-        const labData = <?php echo json_encode($lab_data); ?>;
-        const labLabels = Object.keys(labData);
-        const labCounts = Object.values(labData);
-
-        const labChartCtx = document.getElementById('labChart').getContext('2d');
-        new Chart(labChartCtx, {
-            type: 'pie',
-            data: {
-                labels: labLabels,
-                datasets: [{
-                    label: 'Lab Distribution',
-                    data: labCounts,
-                    backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#F44336', '#9C27B0'],
-                }]
-            }
-        });
-
-        // Status Distribution Chart
-        const statusData = <?php echo json_encode($status_data); ?>;
-        const statusLabels = Object.keys(statusData);
-        const statusCounts = Object.values(statusData);
-
-        const statusChartCtx = document.getElementById('statusChart').getContext('2d');
-        new Chart(statusChartCtx, {
-            type: 'pie',
-            data: {
-                labels: statusLabels,
-                datasets: [{
-                    label: 'Status Distribution',
-                    data: statusCounts,
-                    backgroundColor: ['#4CAF50', '#FF9800', '#2196F3', '#F44336', '#9C27B0'],
-                }]
-            }
-        });
-    </script>
 </body>
 </html>

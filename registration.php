@@ -44,11 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); /* Blue gradient background */
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
             overflow: hidden;
             position: relative;
         }
-
         #star-canvas {
             position: fixed;
             top: 0;
@@ -58,12 +57,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             z-index: 0;
             pointer-events: none;
         }
-
         .form-container {
             position: relative;
-            z-index: 1; /* Ensure the form is above the canvas */
+            z-index: 1;
+            width: 100%;
+            max-width: 32rem;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-
         .form-container > div {
             background: #fff !important;
             border-radius: 1.5rem;
@@ -145,6 +150,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .form-footer a:hover {
             color: #1e40af;
         }
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .form-container {
+                min-height: 80vh;
+            }
+            .form-section {
+                padding: 1.5rem 1rem 1rem 1rem;
+            }
+            .form-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .form-container {
+                max-width: 100%;
+                padding: 0 0.25rem;
+                min-height: 90vh;
+            }
+            .form-section {
+                padding: 1rem 0.25rem 0.5rem 0.25rem;
+            }
+            .form-header {
+                padding-top: 1.25rem;
+                padding-bottom: 1rem;
+            }
+            .form-header h2 {
+                font-size: 1.15rem;
+            }
+            .form-label {
+                font-size: 0.95rem;
+            }
+            .form-input, .form-select {
+                font-size: 0.95rem;
+                padding: 0.6rem 0.75rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .form-header h2 {
+                font-size: 1rem;
+            }
+            .form-section {
+                padding: 0.5rem 0.1rem 0.25rem 0.1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -161,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                         <div class="relative bg-white rounded-lg overflow-hidden">
                             <label for="Idno" class="form-label">ID Number</label>
-                            <input type="text" id="Idno" name="Idno" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter ID Number" required>
+                            <input type="text" id="Idno" name="Idno" class="form-input w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter ID Number" required>
                         </div>
                     </div>
                     
@@ -171,21 +220,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Lastname" class="form-label">Last Name</label>
-                                <input type="text" id="Lastname" name="Lastname" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Last Name" required>
+                                <input type="text" id="Lastname" name="Lastname" class="form-input w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Last Name" required>
                             </div>
                         </div>
                         <div class="group relative">
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Firstname" class="form-label">First Name</label>
-                                <input type="text" id="Firstname" name="Firstname" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter First Name" required>
+                                <input type="text" id="Firstname" name="Firstname" class="form-input w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter First Name" required>
                             </div>
                         </div>
                         <div class="group relative">
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Midname" class="form-label">Middle Name</label>
-                                <input type="text" id="Midname" name="Midname" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Middle Name">
+                                <input type="text" id="Midname" name="Midname" class="form-input w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Middle Name">
                             </div>
                         </div>
                     </div>
@@ -196,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Course" class="form-label">Course</label>
-                                <select id="Course" name="Course" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0 appearance-none" required>
+                                <select id="Course" name="Course" class="form-select w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0 appearance-none" required>
                                     <option value="" disabled selected>Select a Course</option>
                                     <option value="BS IN ACCOUNTANCY">BS IN ACCOUNTANCY</option>
                                     <option value="BS IN BUSINESS ADMINISTRATION">BS IN BUSINESS ADMINISTRATION</option>
@@ -216,7 +265,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Year_Level" class="form-label">Year Level</label>
-                                <select id="Year_Level" name="Year_Level" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0 appearance-none" required>
+                                <select id="Year_Level" name="Year_Level" class="form-select w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0 appearance-none" required>
                                     <option value="" disabled selected>Select a Year Level</option>
                                     <option value="1st Year">1st Year</option>
                                     <option value="2nd Year">2nd Year</option>
@@ -233,7 +282,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Username" class="form-label">Username</label>
-                                <input type="text" id="Username" name="Username" class="w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Username" required>
+                                <input type="text" id="Username" name="Username" class="form-input w-full pr-4 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Username" required>
                             </div>
                         </div>
                         
@@ -241,14 +290,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-200"></div>
                             <div class="relative bg-white rounded-lg overflow-hidden">
                                 <label for="Password" class="form-label">Password</label>
-                                <input type="password" id="Password" name="Password" class="w-full pr-10 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Password" required>
+                                <input type="password" id="Password" name="Password" class="form-input w-full pr-10 py-3 border-0 focus:outline-none focus:ring-0" placeholder="Enter Password" required>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Submit button with enhanced styling -->
                     <div class="flex flex-col items-center justify-center space-y-6 mt-8">
-                        <button type="submit" class="w-full sm:w-auto relative inline-flex items-center justify-center overflow-hidden rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 p-0.5 text-lg font-medium hover:text-white transition-all duration-300 hover:shadow-lg btn-hover-effect">
+                        <button type="submit" class="form-btn w-full sm:w-auto relative inline-flex items-center justify-center overflow-hidden rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 p-0.5 text-lg font-medium hover:text-white transition-all duration-300 hover:shadow-lg btn-hover-effect">
                             <span class="relative rounded-md bg-white px-10 py-3.5 transition-all duration-300 ease-in-out group-hover:bg-opacity-0 text-purple-700 font-bold group-hover:text-white flex items-center">
                                 <span>Create Account</span>
                             </span>

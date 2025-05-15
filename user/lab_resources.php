@@ -188,25 +188,20 @@ if ($fetchResult && $fetchResult->num_rows > 0) {
                 <!-- Nav Links -->
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo ' active'; ?>">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     <a href="profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
                     <a href="edit.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'edit.php') echo ' active'; ?>">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
                     <a href="history.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'history.php') echo ' active'; ?>">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
                     <!-- View Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -214,15 +209,14 @@ if ($fetchResult && $fetchResult->num_rows > 0) {
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
                     <a href="reservation.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'reservation.php') echo ' active'; ?>">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
                     <!-- User Profile -->
@@ -252,10 +246,7 @@ if ($fetchResult && $fetchResult->num_rows > 0) {
     <div class="container mx-auto px-4 py-8">
         <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30">
             <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
-                 style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                <i class="fas fa-box-open text-2xl mr-4 relative z-10"></i>
+                 style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                 <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Lab Resources Hub</h2>
             </div>
             <div class="p-6">
@@ -283,16 +274,14 @@ if ($fetchResult && $fetchResult->num_rows > 0) {
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
                     <?php if (empty($resources)): ?>
                         <div class="col-span-full text-center py-12">
-                            <div class="bg-indigo-50 rounded-xl p-8 max-w-md mx-auto">
-                                <i class="fas fa-folder-open text-6xl text-indigo-300 mb-4"></i>
-                                <h3 class="text-xl font-semibold text-gray-700 mb-2">No Resources Found</h3>
+                                <h3 class="text-xl font-semibold text-gray-700 mb-2">No Resources</h3>
                                 <?php if (!empty($searchQuery)): ?>
-                                    <p class="text-gray-600">We couldn't find any resources matching "<?php echo htmlspecialchars($searchQuery); ?>"</p>
+                                    <p class="text-gray-600">I couldn't find any resources "<?php echo htmlspecialchars($searchQuery); ?>"</p>
                                     <a href="lab_resources.php" class="mt-4 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-700 transition-colors">
-                                        <i class="fas fa-arrow-left mr-2"></i> Back to All Resources
+                                         Back to All Resources
                                     </a>
                                 <?php else: ?>
-                                    <p class="text-gray-600">Check Later</p>
+                                    <p class="text-gray-600">You can Check Later</p>
                                 <?php endif; ?>
                             </div>
                         </div>

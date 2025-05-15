@@ -69,10 +69,7 @@ if ($userId) {
             border: 2px solid #000000 !important;
         }
 
-        /* Keep existing hover-row styles */
-        .hover-row {
-            border-left: 4px solid #2563eb !important;
-        }
+        
         
         /* Add gradient text class for the footer */
         .gradient-text {
@@ -90,9 +87,7 @@ if ($userId) {
             transition: all 0.3s ease;
         }
         
-        .hover-row {
-            border-left: 4px solid #2563eb !important;
-        }
+        
         
         .border-indigo-400 {
             border-color: #2563eb !important;
@@ -164,29 +159,24 @@ if ($userId) {
                 <!-- Nav Links -->
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo ' active'; ?>">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     
                     <a href="profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
 
                     <a href="edit.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'edit.php') echo ' active'; ?>">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
 
                     <a href="history.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'history.php') echo ' active'; ?>">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
 
                     <!-- View Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -195,16 +185,15 @@ if ($userId) {
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
 
                     <a href="reservation.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'reservation.php') echo ' active'; ?>">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
 
@@ -243,58 +232,50 @@ if ($userId) {
 
         <!-- Profile section -->
         <div class="p-8">
-            <!-- Profile image and basic info -->
-            <div class="flex flex-col items-center mb-8">
-                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-100 mb-4">
-                    <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Student Image" class="w-full h-full object-cover">
+            <div class="flex flex-col md:flex-row md:items-start md:space-x-10 md:space-y-0 space-y-8">
+                <!-- Profile image and basic info (Left) -->
+                <div class="flex flex-col items-center md:items-start md:w-1/3 w-full">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-4">
+                        <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Student Image" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-1 text-center md:text-left"><?php echo htmlspecialchars($fullName); ?></h3>
+                    <p class="text-black-600 font-medium mb-2 text-center md:text-left"><?php echo htmlspecialchars($course); ?></p>
+                    <p class="text-black-600 text-center md:text-left"><?php echo htmlspecialchars($email); ?></p>
                 </div>
-                <h3 class="text-2xl font-bold text-gray-800 mb-1"><?php echo htmlspecialchars($fullName); ?></h3>
-                <p class="text-blue-600 font-medium mb-2"><?php echo htmlspecialchars($course); ?></p>
-                <p class="text-gray-600"><?php echo htmlspecialchars($email); ?></p>
-            </div>
-
-            <!-- Information Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <!-- Left Column -->
-                <div class="space-y-4">
+                <!-- Information Cards (Right) -->
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:w-2/3 w-full">
                     <!-- ID Number Card -->
-                    <div class="hover-row rounded-lg p-6 border-l-4 border-blue-500 bg-gray-50 transition-all duration-300">
+                    <div class="hover-row rounded-lg p-6 bg-gray-50 transition-all duration-300">
                         <div class="flex items-center space-x-3">
+                            <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">ID NUMBER</p>
                             <div class="flex-1">
-                                <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">ID NUMBER</p>
                                 <p class="font-semibold text-xl text-gray-800"><?php echo htmlspecialchars($idNo); ?></p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Year Level Card -->
-                    <div class="hover-row rounded-lg p-6 border-l-4 border-blue-500 bg-gray-50 transition-all duration-300">
-                        <div class="flex items-center space-x-3">
-                            <div class="flex-1">
-                                <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">YEAR LEVEL</p>
-                                <p class="font-semibold text-xl text-gray-800"><?php echo htmlspecialchars($yearLevel); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="space-y-4">
                     <!-- Address Card -->
-                    <div class="hover-row rounded-lg p-6 border-l-4 border-blue-500 bg-gray-50 transition-all duration-300">
+                    <div class="hover-row rounded-lg p-6 bg-gray-50 transition-all duration-300">
                         <div class="flex items-center space-x-3">
+                            <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">ADDRESS</p>
                             <div class="flex-1">
-                                <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">ADDRESS</p>
                                 <p class="font-semibold text-xl text-gray-800"><?php echo htmlspecialchars($address); ?></p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Session Card -->
-                    <div class="hover-row rounded-lg p-6 border-l-4 border-blue-500 bg-gray-50 transition-all duration-300">
+                    <!-- Year Level Card -->
+                    <div class="hover-row rounded-lg p-6 bg-gray-50 transition-all duration-300">
                         <div class="flex items-center space-x-3">
+                            <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">YEAR LEVEL</p>
                             <div class="flex-1">
-                                <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">SESSION</p>
+                                <p class="font-semibold text-xl text-gray-800"><?php echo htmlspecialchars($yearLevel); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Session Card -->
+                    <div class="hover-row rounded-lg p-6 bg-gray-50 transition-all duration-300">
+                        <div class="flex items-center space-x-3">
+                            <p class="text-xs uppercase tracking-wider text-gray-500 mb-1">SESSION</p>
+                            <div class="flex-1">
                                 <p class="font-semibold text-xl text-gray-800"><?php echo htmlspecialchars($session); ?></p>
                             </div>
                         </div>

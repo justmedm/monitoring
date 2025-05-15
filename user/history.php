@@ -155,25 +155,20 @@ if ($userId) {
                 <!-- Nav Links -->
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo ' active'; ?>">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     <a href="profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
                     <a href="edit.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'edit.php') echo ' active'; ?>">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
                     <a href="history.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'history.php') echo ' active'; ?>">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
                     <!-- View Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -181,15 +176,14 @@ if ($userId) {
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
                     <a href="reservation.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'reservation.php') echo ' active'; ?>">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
                     <!-- User Profile -->
@@ -217,11 +211,9 @@ if ($userId) {
     </header>
     <!-- History Content -->
     <div class="container mx-auto px-4 py-8">
-        <div class="bg-white/95 rounded-2xl shadow-custom backdrop-blur-sm overflow-hidden border border-white/20 transition-shadow duration-300 hover:shadow-hover">
+        <div class="bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl shadow-custom backdrop-blur-sm overflow-hidden border border-white/20 transition-shadow duration-300 hover:shadow-hover">
             <!-- Keep the original header design as requested -->
             <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                 <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">History Information</h2>
             </div>
             
@@ -342,8 +334,8 @@ if ($userId) {
                                 echo "<tr><td colspan='9' class='px-6 py-10 text-center'>";
                                 echo "<div class='flex flex-col items-center justify-center'>";
                                 echo "<i class='fas fa-history text-5xl text-gray-300 mb-3'></i>";
-                                echo "<div class='text-gray-500 font-medium text-lg'>No sit-in records found</div>";
-                                echo "<div class='text-sm text-gray-400 mt-1 max-w-md'>Your sit-in history will appear here once you start using the facilities</div>";
+                                echo "<div class='text-gray-500 font-medium text-lg'>No records found</div>";
+                                echo "<div class='text-sm text-gray-400 mt-1 max-w-md'>Your sit-in history will be stored here</div>";
                                 echo "</div>";
                                 echo "</td></tr>";
                             }

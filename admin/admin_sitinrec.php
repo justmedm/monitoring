@@ -122,36 +122,32 @@ $total_pages = ceil($total_entries / $entries_per_page);
                 <!-- Center/Right - Navigation Menu -->
                 <nav class="flex items-center space-x-6">
                     <a href="admin_dashboard.php" class="nav-item">
-                        <i class="ri-home-line"></i>
                         <span>Home</span>
                     </a>
                     
                     <a href="admin_search.php" class="nav-item">
-                        <i class="ri-search-line"></i>
                         <span>Search</span>
                     </a>
                     
                     <a href="admin_sitin.php" class="nav-item">
-                        <i class="ri-user-follow-line"></i>
                         <span>Sit-in</span>
                     </a>
 
                     <!-- View Dropdown -->
                     <div class="relative group">
                         <button class="nav-item active">
-                            <i class="ri-eye-line"></i>
                             <span>View</span>
                             <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_sitinrec.php" class="dropdown-item">
-                                <i class="ri-file-list-line mr-2"></i>Sit-in Records
+                                Sit-in Records
                             </a>
                             <a href="admin_studlist.php" class="dropdown-item">
-                                <i class="ri-list-check mr-2"></i>List of Students
+                                List of Students
                             </a>
                             <a href="admin_feedback.php" class="dropdown-item">
-                                <i class="ri-message-3-line mr-2"></i>Feedbacks
+                                Feedbacks
                             </a>
                         </div>
                     </div>
@@ -159,35 +155,31 @@ $total_pages = ceil($total_entries / $entries_per_page);
                     <!-- Lab Dropdown -->
                     <div class="relative group">
                         <button class="nav-item">
-                            <i class="ri-computer-line"></i>
                             <span>Lab</span>
                             <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_resources.php" class="dropdown-item">
-                                <i class="fas fa-box-open mr-2"></i>Resources
+                                Resources
                             </a>
                             <a href="admin_lab_schedule.php" class="dropdown-item">
-                                <i class="fas fa-calendar-alt mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                             <a href="admin_lab_usage.php" class="dropdown-item">
-                                <i class="fas fa-chart-bar mr-2"></i>Lab Usage Point
+                                Lab Usage Point
                             </a>
                         </div>
                     </div>
 
                     <a href="admin_reports.php" class="nav-item">
-                        <i class="ri-line-chart-line"></i>
                         <span>Reports</span>
                     </a>
 
                     <a href="admin_reservation.php" class="nav-item">
-                        <i class="ri-calendar-check-line"></i>
                         <span>Reservation</span>
                     </a>
 
                     <a href="../logout.php" class="nav-item hover:bg-red-500/20">
-                        <i class="ri-logout-box-r-line"></i>
                         <span>Logout</span>
                     </a>
                 </nav>
@@ -197,9 +189,7 @@ $total_pages = ceil($total_entries / $entries_per_page);
 
     <!-- Content Container -->
     <div class="w-[90%] mx-auto my-8 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-        <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
             <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Current Sit-in Records</h2>
         </div>
 
@@ -238,7 +228,7 @@ $total_pages = ceil($total_entries / $entries_per_page);
             <!-- Table -->
             <div class="overflow-x-auto">
                 <table class="min-w-full">
-                <thead style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);" class="text-white">
+                <thead style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%);" class="text-white">
                         <tr>
                             <th class="px-6 py-3 text-left">ID Number</th>
                             <th class="px-6 py-3 text-left">Name</th>

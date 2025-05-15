@@ -98,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 1rem;
         }
         .login-btn {
-            border: 2px solid #2563eb;
             color: #2563eb;
             background: #fff;
             border-radius: 0.75rem;
@@ -136,9 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: 600;
             transition: color 0.2s;
         }
-        .login-link:hover {
-            color: #2563eb;
-            text-decoration: underline;
+
         }
         @media (max-width: 640px) {
             .login-card {
@@ -167,10 +164,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="inline-block relative">
                     <h1 class="login-title">CCS SIT-IN MONITORING</h1>
                 </div>
-                <p class="login-subtitle">Enter your credentials to access the system</p>
             </div>
         </div>
-        <div class="h-1.5" style="background: #e5e7eb;"></div>
+        
         <div class="px-8 py-8 relative overflow-hidden bg-white">
             <form id="loginForm" method="POST" action="" class="relative z-10 space-y-6">
                 <!-- Username input -->
@@ -200,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- Login button -->
                 <div class="pt-2 flex justify-center">
-                    <button type="submit" class="login-btn w-full sm:w-auto px-10 py-3.5">
+                    <button type="submit" class="login-btn w-full sm:w-auto">
                         <span>Login</span>
                     </button>
                 </div>

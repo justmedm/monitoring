@@ -203,24 +203,19 @@ unset($_SESSION['errorMessage']);
             <div class="flex items-center space-x-6">
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo ' active'; ?>">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     <a href="profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
                     <a href="edit.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'edit.php') echo ' active'; ?>">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
                     <a href="history.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'history.php') echo ' active'; ?>">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -228,15 +223,14 @@ unset($_SESSION['errorMessage']);
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
                     <a href="reservation.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'reservation.php') echo ' active'; ?>">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
                     <div class="relative" x-data="{ open: false }">
@@ -299,7 +293,7 @@ unset($_SESSION['errorMessage']);
                 <div class="w-full bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
                          style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                        <h2 class="text-xl font-bold tracking-wider uppercase">Make a Reservation</h2>
+                        <h2 class="text-xl font-bold tracking-wider uppercase">Reservation</h2>
                     </div>
                     <form action="reservation.php" method="post" class="p-8 space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -397,7 +391,7 @@ unset($_SESSION['errorMessage']);
                     
                     <div class="p-4">
                         <div id="pc_message" class="text-center py-6 text-gray-500">
-                            Please select a laboratory from the reservation form to view available PCs
+                           select a laboratory 
                         </div>
                         
                         <div id="pc_grid" class="hidden grid grid-cols-5 gap-4 p-4 max-h-96 overflow-y-auto">

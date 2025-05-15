@@ -289,36 +289,36 @@ if (isset($_SESSION['toast'])) {
                 <!-- Center/Right - Navigation Menu -->
                 <nav class="flex items-center space-x-6">
                     <a href="admin_dashboard.php" class="nav-item active">
-                        <i class="ri-home-line"></i>
+                        
                         <span>Home</span>
                     </a>
                     
                     <a href="admin_search.php" class="nav-item">
-                        <i class="ri-search-line"></i>
+                        
                         <span>Search</span>
                     </a>
                     
                     <a href="admin_sitin.php" class="nav-item">
-                        <i class="ri-user-follow-line"></i>
+                        
                         <span>Sit-in</span>
                     </a>
 
                     <!-- View Dropdown -->
                     <div class="relative group">
                         <button class="nav-item" onclick="toggleDropdown('viewDropdown')">
-                            <i class="ri-eye-line"></i>
+                            
                             <span>View</span>
-                            <i class="ri-arrow-down-s-line"></i>
+                            
                         </button>
                         <div id="viewDropdown" class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden">
                             <a href="admin_sitinrec.php" class="dropdown-item">
-                                <i class="ri-file-list-line mr-2"></i>Sit-in Records
+                                Sit-in Records
                             </a>
                             <a href="admin_studlist.php" class="dropdown-item">
-                                <i class="ri-list-check mr-2"></i>List of Students
+                                List of Students
                             </a>
                             <a href="admin_feedback.php" class="dropdown-item">
-                                <i class="ri-message-3-line mr-2"></i>Feedbacks
+                                Feedbacks
                             </a>
                         </div>
                     </div>
@@ -326,30 +326,30 @@ if (isset($_SESSION['toast'])) {
                     <!-- Lab Dropdown -->
                     <div class="relative group">
                         <button class="nav-item" onclick="toggleDropdown('labDropdown')">
-                            <i class="ri-computer-line"></i>
+                            
                             <span>Lab</span>
-                            <i class="ri-arrow-down-s-line"></i>
+                            
                         </button>
                         <div id="labDropdown" class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden">
                             <a href="admin_resources.php" class="dropdown-item">
-                                <i class="fas fa-box-open mr-2"></i>Resources
+                                Resources
                             </a>
                             <a href="admin_lab_schedule.php" class="dropdown-item">
-                                <i class="fas fa-calendar-alt mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                             <a href="admin_lab_usage.php" class="dropdown-item">
-                                <i class="fas fa-chart-bar mr-2"></i>Lab Usage Point
+                                Lab Usage Point
                             </a>
                         </div>
                     </div>
 
                     <a href="admin_reports.php" class="nav-item">
-                        <i class="ri-line-chart-line"></i>
+                        
                         <span>Reports</span>
                     </a>
 
                     <a href="admin_reservation.php" class="nav-item">
-                        <i class="ri-calendar-check-line"></i>
+                        
                         <span>Reservation</span>
                     </a>
 
@@ -399,7 +399,6 @@ if (isset($_SESSION['toast'])) {
                     </div>
 
                     <a href="../logout.php" class="nav-item hover:bg-red-500/20">
-                        <i class="ri-logout-box-r-line"></i>
                         <span>Logout</span>
                     </a>
                 </nav>
@@ -415,25 +414,22 @@ if (isset($_SESSION['toast'])) {
             <div class="w-1/2">
                 <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30">
                     <!-- Header -->
-                    <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                        <i class="fas fa-users text-2xl mr-4 relative z-10"></i>
+                    <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Students Year Level</h2>
                     </div>
                     <!-- Stats Cards Row (moved here) -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 px-8 pt-8 pb-4">
                         <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-4 shadow-lg border border-blue-100/50 flex flex-col items-center text-center">
-                            <span class="text-3xl font-bold text-blue-600 mb-1"><?php echo $totalStudents; ?></span>
-                            <span class="text-xs text-blue-600/70 font-medium uppercase tracking-wider">Students Registered</span>
+                            <span class="text-3xl font-bold text-black-600 mb-1"><?php echo $totalStudents; ?></span>
+                            <span class="text-xs text-black-600/70 font-medium uppercase tracking-wider">Students Registered</span>
                         </div>
                         <div class="bg-gradient-to-br from-purple-50 to-white rounded-xl p-4 shadow-lg border border-purple-100/50 flex flex-col items-center text-center">
-                            <span class="text-3xl font-bold text-purple-600 mb-1"><?php echo $currentSitIns; ?></span>
-                            <span class="text-xs text-purple-600/70 font-medium uppercase tracking-wider">Currently Sit-In</span>
+                            <span class="text-3xl font-bold text-black-600 mb-1"><?php echo $currentSitIns; ?></span>
+                            <span class="text-xs text-black-600/70 font-medium uppercase tracking-wider">Currently Sit-In</span>
                         </div>
                         <div class="bg-gradient-to-br from-green-50 to-white rounded-xl p-4 shadow-lg border border-green-100/50 flex flex-col items-center text-center">
-                            <span class="text-3xl font-bold text-green-600 mb-1"><?php echo $totalSitIns; ?></span>
-                            <span class="text-xs text-green-600/70 font-medium uppercase tracking-wider">Total Sit-Ins</span>
+                            <span class="text-3xl font-bold text-black-600 mb-1"><?php echo $totalSitIns; ?></span>
+                            <span class="text-xs text-black-600/70 font-medium uppercase tracking-wider">Total Sit-Ins</span>
                         </div>
                     </div>
                     <!-- Chart -->
@@ -448,10 +444,7 @@ if (isset($_SESSION['toast'])) {
             <!-- Programming Distribution Chart -->
             <div class="w-1/2">
                 <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30">
-                    <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                        <i class="fas fa-chart-bar text-2xl mr-4 relative z-10"></i>
+                    <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Statistics</h2>
                     </div>
                     <div class="p-8 h-[calc(100%-5rem)] flex flex-col">
@@ -469,10 +462,7 @@ if (isset($_SESSION['toast'])) {
             <div class="w-1/2">
                 <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30 h-full min-h-[700px] flex flex-col">
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
-                         style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                        <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-                        <i class="fas fa-bullhorn text-2xl mr-4 relative z-10"></i>
+                         style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Announcements</h2>
                     </div>
                     <div class="p-8 h-[calc(100%-5rem)] flex flex-col">
@@ -501,11 +491,9 @@ if (isset($_SESSION['toast'])) {
                                     <p class="text-gray-500 text-center py-4">No announcements available.</p>
                                 <?php else: ?>
                                     <?php foreach ($announcements as $announcement): ?>
-                                        <div class="bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-gradient-purple" 
-                                             style="border-image: linear-gradient(to bottom, #4A69BB, #CD4DCC) 1;">
-                                            <div class="flex items-center text-sm font-bold text-purple-600 mb-3">
+                                        <div class="bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-gradient-purple" >
+                                            <div class="flex items-center text-sm font-bold text-black-600 mb-3">
                                                 <span><?php echo htmlspecialchars($announcement['CREATED_BY']); ?></span>
-                                                <span class="mx-2">•</span>
                                                 <span><?php echo date('Y-M-d', strtotime($announcement['CREATED_DATE'])); ?></span>
                                                 <div class="ml-auto flex space-x-2">
                                                     <button onclick="editAnnouncement(<?php echo $announcement['ID']; ?>, this)" 
@@ -548,7 +536,7 @@ if (isset($_SESSION['toast'])) {
             <div class="w-1/2 flex items-center justify-center">
                 <div class="w-full bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30 h-full min-h-[700px] flex flex-col">
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden w-full"
-                         style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
+                         style="background: linear-gradient(135deg, #2563eb 1000%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Student Leaderboard</h2>
                     </div>
                     <div class="w-full flex flex-col items-center py-8 flex-1">
@@ -976,7 +964,7 @@ if (isset($_SESSION['toast'])) {
                 },
                 series: [{
                     type: 'pie',
-                    radius: ['30%', '60%'],
+                    radius: '60%',
                     center: ['50%', '40%'],  // Moved up more to accommodate legend
                     avoidLabelOverlap: true,
                     itemStyle: {
@@ -1015,38 +1003,68 @@ if (isset($_SESSION['toast'])) {
             
             // Replace the Chart.js initialization with ECharts
             const yearLevelChart = echarts.init(document.getElementById('yearLevelChart'));
+            const yearLevelPieData = <?php
+                $pieData = [];
+                $labels = array_keys($yearLevelCounts);
+                $values = array_values($yearLevelCounts);
+                foreach ($labels as $i => $label) {
+                    $pieData[] = ['value' => $values[$i], 'name' => $label];
+                }
+                echo json_encode($pieData);
+            ?>;
             const yearLevelOption = {
-                xAxis: {
-                    type: 'category',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'horizontal',
+                    bottom: 10,
+                    left: 'center',
                     data: <?php echo $yearLevelLabelsJSON; ?>,
-                    axisLabel: {
+                    textStyle: {
                         fontSize: 12,
+                        color: '#666'
+                    }
+                },
+                title: {
+                    text: 'Student Year Level Distribution',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        fontSize: 16,
                         fontWeight: 'bold'
                     }
                 },
-                yAxis: {
-                    type: 'value',
-                    name: 'Number of Students',
-                    nameLocation: 'middle',
-                    nameGap: 40
-                },
-                series: [
-                    {
-                        data: <?php echo $yearLevelJSON; ?>,
-                        type: 'bar',
-                        showBackground: true,
-                        backgroundStyle: {
-                            color: 'rgba(180, 180, 180, 0.2)'
+                series: [{
+                    type: 'pie',
+                    radius: '60%',
+                    center: ['50%', '50%'],
+                    itemStyle: {
+                        borderRadius: 6,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '14',
+                            fontWeight: 'bold',
+                            formatter: '{b}\n{d}%'
                         },
                         itemStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                { offset: 0, color: '#83bff6' },
-                                { offset: 0.5, color: '#188df0' },
-                                { offset: 1, color: '#188df0' }
-                            ])
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
-                    }
-                ]
+                    },
+                    data: yearLevelPieData
+                }],
+                color: ['#36A2EB', '#4BC0C0', '#FFCE56', '#4CAF50'],
+                backgroundColor: 'transparent'
             };
 
             yearLevelChart.setOption(yearLevelOption);

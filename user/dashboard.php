@@ -243,29 +243,24 @@ while ($row = $result->fetch_assoc()) {
                 <!-- Nav Links -->
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item active">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     
                     <a href="profile.php" class="nav-item">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
 
                     <a href="edit.php" class="nav-item">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
 
                     <a href="history.php" class="nav-item">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
 
                     <!-- View Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -274,16 +269,15 @@ while ($row = $result->fetch_assoc()) {
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
 
                     <a href="reservation.php" class="nav-item">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
 

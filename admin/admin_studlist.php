@@ -162,36 +162,32 @@ $result = mysqli_query($conn, $query);
                 <!-- Center/Right - Navigation Menu -->
                 <nav class="flex items-center space-x-6">
                     <a href="admin_dashboard.php" class="nav-item">
-                        <i class="ri-home-line"></i>
                         <span>Home</span>
                     </a>
                     
                     <a href="admin_search.php" class="nav-item">
-                        <i class="ri-search-line"></i>
                         <span>Search</span>
                     </a>
                     
                     <a href="admin_sitin.php" class="nav-item">
-                        <i class="ri-user-follow-line"></i>
                         <span>Sit-in</span>
                     </a>
 
                     <!-- View Dropdown -->
                     <div class="relative group">
                         <button class="nav-item active">
-                            <i class="ri-eye-line"></i>
                             <span>View</span>
                             <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_sitinrec.php" class="dropdown-item">
-                                <i class="ri-file-list-line mr-2"></i>Sit-in Records
+                                Sit-in Records
                             </a>
                             <a href="admin_studlist.php" class="dropdown-item">
-                                <i class="ri-list-check mr-2"></i>List of Students
+                                List of Students
                             </a>
                             <a href="admin_feedback.php" class="dropdown-item">
-                                <i class="ri-message-3-line mr-2"></i>Feedbacks
+                                Feedbacks
                             </a>
                         </div>
                     </div>
@@ -199,35 +195,31 @@ $result = mysqli_query($conn, $query);
                     <!-- Lab Dropdown -->
                     <div class="relative group">
                         <button class="nav-item">
-                            <i class="ri-computer-line"></i>
                             <span>Lab</span>
                             <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_resources.php" class="dropdown-item">
-                                <i class="fas fa-box-open mr-2"></i>Resources
+                                Resources
                             </a>
                             <a href="admin_lab_schedule.php" class="dropdown-item">
-                                <i class="fas fa-calendar-alt mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                             <a href="admin_lab_usage.php" class="dropdown-item">
-                                <i class="fas fa-chart-bar mr-2"></i>Lab Usage Point
+                                Lab Usage Point
                             </a>
                         </div>
                     </div>
 
                     <a href="admin_reports.php" class="nav-item">
-                        <i class="ri-line-chart-line"></i>
                         <span>Reports</span>
                     </a>
 
                     <a href="admin_reservation.php" class="nav-item">
-                        <i class="ri-calendar-check-line"></i>
                         <span>Reservation</span>
                     </a>
 
                     <a href="../logout.php" class="nav-item hover:bg-red-500/20">
-                        <i class="ri-logout-box-r-line"></i>
                         <span>Logout</span>
                     </a>
                 </nav>
@@ -236,9 +228,7 @@ $result = mysqli_query($conn, $query);
     </div>
 
     <div class="content-container w-11/12 mx-auto my-8 bg-white p-6 rounded-lg shadow-lg overflow-hidden border border-gray-200">
-        <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-            <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
             <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Student Information</h2>
         </div>
         
@@ -274,12 +264,10 @@ $result = mysqli_query($conn, $query);
                 <div class="flex items-center space-x-3">
                     <button id="addStudentBtn" 
                         class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                        <i class="ri-user-add-line mr-2"></i>
                         Add New Student
                     </button>
                     <button id="resetSessionBtn" 
                         class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                        <i class="ri-refresh-line mr-2"></i>
                         Reset All Session
                     </button>
                 </div>
@@ -394,13 +382,57 @@ $result = mysqli_query($conn, $query);
         </div>
     </div>
     
-    <div class="py-4 px-6 bg-white/95 backdrop-blur-sm mt-8 relative">
-        <div class="absolute inset-x-0 top-0 h-1" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)"></div>
-        <p class="text-center text-sm text-gray-600">
-            &copy; 2025 CCS Sit-in Monitoring System | <span class="gradient-text font-medium">UC - College of Computer Studies</span>
-        </p>
+    <!-- Add New Student Modal -->
+    <div id="addStudentModal" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-auto p-6 relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-xl">&times;</button>
+            <h3 class="text-lg font-bold mb-4 text-center">Add New Student</h3>
+            <form id="addStudentForm" method="POST" action="">
+                <div class="mb-3">
+                    <label for="Idno" class="block text-sm font-medium text-gray-700">ID Number</label>
+                    <input type="text" id="Idno" name="Idno" maxlength="8" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input type="text" id="Lastname" name="Lastname" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Firstname" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input type="text" id="Firstname" name="Firstname" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Midname" class="block text-sm font-medium text-gray-700">Middle Name</label>
+                    <input type="text" id="Midname" name="Midname" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Course" class="block text-sm font-medium text-gray-700">Course</label>
+                    <input type="text" id="Course" name="Course" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Year_Level" class="block text-sm font-medium text-gray-700">Year Level</label>
+                    <select id="Year_Level" name="Year_Level" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                        <option value="">Select Year Level</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="Username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="Username" name="Username" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="mb-3">
+                    <label for="Password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="Password" name="Password" required class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1">
+                </div>
+                <div class="flex justify-end gap-2 mt-4">
+                    <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add Student</button>
+                </div>
+            </form>
+        </div>
     </div>
-
 
     <script>
         function handleKeyPress(event) {

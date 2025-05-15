@@ -236,24 +236,19 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
             <div class="flex items-center space-x-6">
                 <nav class="hidden md:flex items-center space-x-4">
                     <a href="dashboard.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'dashboard.php') echo ' active'; ?>">
-                        <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                     <a href="profile.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'profile.php') echo ' active'; ?>">
-                        <i class="fas fa-user"></i>
                         <span>Profile</span>
                     </a>
                     <a href="edit.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'edit.php') echo ' active'; ?>">
-                        <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
                     <a href="history.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'history.php') echo ' active'; ?>">
-                        <i class="fas fa-history"></i>
                         <span>History</span>
                     </a>
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="nav-item">
-                            <i class="fas fa-eye"></i>
                             <span>View</span>
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
@@ -261,15 +256,14 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                              @click.outside="open = false"
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
                             <a href="lab_resources.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-desktop mr-2"></i>Lab Resource
+                                Lab Resource
                             </a>
                             <a href="lab_schedule.php" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">
-                                <i class="fas fa-calendar-week mr-2"></i>Lab Schedule
+                                Lab Schedule
                             </a>
                         </div>
                     </div>
                     <a href="reservation.php" class="nav-item<?php if(basename($_SERVER['PHP_SELF']) == 'reservation.php') echo ' active'; ?>">
-                        <i class="fas fa-calendar-alt"></i>
                         <span>Reservation</span>
                     </a>
                     <div class="relative" x-data="{ open: false }">
@@ -296,8 +290,8 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
     <!-- Main Content Container -->
     <div class="container mx-auto px-4 py-8">
         <div class="modern-card">
-            <div class="card-header text-white p-5 flex items-center justify-center relative overflow-hidden">
-                <h2 class="text-xl font-bold tracking-wider uppercase relative z-10 font-sans">Laboratory Management</h2>
+            <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
+                <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">LABORATORY MANAGEMENT</h2>
             </div>
             <div class="p-6">
                 <!-- Centered Dropdowns -->
@@ -311,7 +305,7 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                             <?php endforeach; ?>
                         </select>
                         <span class="dropdown-arrow absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                            <i class="fas fa-chevron-down"></i>
+                                
                         </span>
                     </div>
                     <div class="relative">
@@ -332,8 +326,8 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                     <table class="schedule-table">
                         <thead>
                             <tr>
-                                <th width="25%">Time Slot</th>
-                                <th width="45%">Course Details</th>
+                                <th width="25%">Time</th>
+                                <th width="45%">Course</th>
                                 <th width="30%">Professor</th>
                             </tr>
                         </thead>
@@ -385,23 +379,16 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="3" class="text-center py-6 text-gray-500 italic">No schedules found for this day and laboratory</td>
+                                    <td colspan="3" class="text-center py-6 text-gray-500 italic">No schedules found for now</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-4 text-sm text-gray-500">
-                    <p>Note: Schedule may change without prior notice. Please check regularly for updates.</p>
-                </div>
+                
             </div>
         </div>
     </div>
-    <div class="py-4 px-6 bg-white/95 backdrop-blur-sm mt-8 relative">
-        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"></div>
-        <p class="text-center text-sm text-gray-600">
-            &copy; 2025 CCS Sit-in Monitoring System | <span class="gradient-text font-medium">UC - College of Computer Studies</span>
-        </p>
-    </div>
+    
 </body>
 </html>

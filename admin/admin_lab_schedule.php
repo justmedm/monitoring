@@ -178,10 +178,7 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
         <div class="modern-card">
-            <div class="card-header p-5 flex items-center justify-center relative overflow-hidden" 
-                 style="background: linear-gradient(135deg, #4066E0 0%, #4D6AFF 100%)">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                 <h2 class="text-xl font-bold tracking-wider uppercase relative z-10 font-sans text-white">Laboratory Management</h2>
             </div>
             
@@ -234,7 +231,7 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
 
                     <!-- Add New Schedule Button - Kept Original -->
-                    <button id="openScheduleModal" class="bg-gradient-to-br from-blue-600 to-purple-700 text-white font-medium py-2.5 px-5 rounded-full hover:shadow-md transition-all">
+                    <button id="openScheduleModal" class="bg-gradient-to-br from-blue-600 to-blue-700 text-white font-medium py-2.5 px-5 rounded-full hover:shadow-md transition-all">
                         <i class="fas fa-plus mr-2"></i> Add New Schedule
                     </button>
                 </div>
@@ -326,7 +323,7 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="4" class="text-center py-6 text-gray-500 italic">No schedules found for this day and laboratory</td>
+                                    <td colspan="4" class="text-center py-6 text-gray-500 italic">No schedules found for this day</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -341,54 +338,15 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
         <div class="modal-content">
             <button type="button" class="modal-close" id="closeScheduleModal">&times;</button>
             
-            <div class="modal-columns">
-                <!-- Left Column -->
-                <div class="modal-left">
-                    <h3 class="modal-title">Add New Schedule</h3>
-                    <p class="modal-subtitle">Create a new laboratory class schedule with the details on the right.</p>
-                    
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-calendar-day"></i>
-                            </div>
-                            <span>Select day of the week</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <span>Choose laboratory room</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <span>Set time duration</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <span>Add subject details</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <span>Assign professor</span>
-                        </div>
-                    </div>
-                </div>
+            
                 
                 <!-- Right Column - Form -->
                 <div class="modal-right">
                     <form id="scheduleForm" action="add_schedule.php" method="POST">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="day" class="form-label">Day of Week</label>
+                                <label for="day" class="form-label">Select day of the Week</label>
                                 <div class="input-icon select-icon">
-                                    <i class="fas fa-calendar-alt"></i>
                                     <select id="day" name="day" class="form-control form-select" required>
                                         <option value="" disabled selected>Select Day</option>
                                         <option value="Monday">Monday</option>
@@ -404,7 +362,6 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                             <div class="form-group">
                                 <label for="laboratory" class="form-label">Laboratory</label>
                                 <div class="input-icon select-icon">
-                                    <i class="fas fa-desktop"></i>
                                     <select id="laboratory" name="laboratory" class="form-control form-select" required>
                                         <option value="" disabled selected>Select Laboratory</option>
                                         <option value="Lab 517">Lab 517</option>
@@ -424,13 +381,11 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                             <div class="form-row">
                                 <div>
                                     <div class="input-icon">
-                                        <i class="fas fa-hourglass-start"></i>
                                         <input type="time" id="time_start" name="time_start" class="form-control" required placeholder="Start Time">
                                     </div>
                                 </div>
                                 <div>
                                     <div class="input-icon">
-                                        <i class="fas fa-hourglass-end"></i>
                                         <input type="time" id="time_end" name="time_end" class="form-control" required placeholder="End Time">
                                     </div>
                                 </div>
@@ -440,7 +395,6 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="form-group">
                             <label for="subject" class="form-label">Subject</label>
                             <div class="input-icon">
-                                <i class="fas fa-book-open"></i>
                                 <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter subject name" required>
                             </div>
                         </div>
@@ -448,17 +402,16 @@ $schedules = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="form-group">
                             <label for="professor" class="form-label">Professor</label>
                             <div class="input-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
                                 <input type="text" id="professor" name="professor" class="form-control" placeholder="Enter professor name" required>
                             </div>
                         </div>
                         
                         <div class="btn-row">
                             <button type="button" class="btn btn-cancel" id="cancelScheduleModal">
-                                <i class="fas fa-times btn-icon"></i>Cancel
+                                Cancel
                             </button>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save btn-icon"></i>Save Schedule
+                                Save Schedule
                             </button>
                         </div>
                     </form>

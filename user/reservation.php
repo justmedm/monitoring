@@ -287,12 +287,12 @@ unset($_SESSION['errorMessage']);
             </script>
         <?php endif; ?>
         
-        <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex flex-col md:flex-row gap-6 justify-center mt-12">
             <!-- Reservation Form -->
             <div class="w-full md:w-1/2"> <!-- Reservation container -->
                 <div class="w-full bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
-                         style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
+                         style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase">Reservation</h2>
                     </div>
                     <form action="reservation.php" method="post" class="p-8 space-y-6">
@@ -358,12 +358,16 @@ unset($_SESSION['errorMessage']);
                                 <input type="time" id="time_in" name="time_in" required
                                     class="w-full p-3 border border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:ring-2 focus:ring-purple-500/50 transition-colors duration-200">
                             </div>
-                            <!-- Remaining Sessions -->
-                            <div class="flex items-center">
+                            <!-- Centered Remaining Sessions + Select a PC Button -->
+                            <div class="flex justify-center items-center space-x-2 col-span-2">
                                 <input type="text" id="remaining_session" name="remaining_session" 
                                     value="<?php echo htmlspecialchars($userSessions); ?>" 
-                                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 cursor-not-allowed focus:ring-2 focus:ring-purple-500/50" 
+                                    class="max-w-[120px] p-3 border border-gray-300 rounded-lg bg-gray-50 cursor-not-allowed focus:ring-2 focus:ring-purple-500/50 text-center" 
                                     readonly placeholder="Remaining Sessions">
+                                <button type="button" id="showPcPanelBtn"
+                                    class="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                                    Select a PC
+                                </button>
                             </div>
                             
                             <!-- Hidden PC input (will be updated by the PC selection panel) -->
@@ -381,19 +385,18 @@ unset($_SESSION['errorMessage']);
                 </div>
             </div>
             
-            <!-- PC Selection Panel -->
-            <div class="w-full md:w-1/2 flex flex-col"> 
-                <div class="flex-1 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+            <!-- PC Selection Modal -->
+            <div id="pcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 w-full max-w-2xl relative">
+                    <button id="closePcModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold focus:outline-none">&times;</button>
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
                          style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase">Select a PC</h2>
                     </div>
-                    
                     <div class="p-4">
                         <div id="pc_message" class="text-center py-6 text-gray-500">
                            select a laboratory 
                         </div>
-                        
                         <div id="pc_grid" class="hidden grid grid-cols-5 gap-4 p-4 max-h-96 overflow-y-auto">
                             <!-- PC cards will be dynamically generated -->
                         </div>
@@ -402,8 +405,6 @@ unset($_SESSION['errorMessage']);
             </div>
         </div>
     </div>
-
-
 
     <script>
         // Toggle sidebar navigation
@@ -497,6 +498,27 @@ unset($_SESSION['errorMessage']);
             // Update the hidden input value
             document.getElementById('available_pc').value = pcNumber;
         }
+
+        // Toggle PC selection modal
+        document.addEventListener('DOMContentLoaded', function() {
+            var showBtn = document.getElementById('showPcPanelBtn');
+            var pcModal = document.getElementById('pcModal');
+            var closeBtn = document.getElementById('closePcModalBtn');
+            if (showBtn && pcModal && closeBtn) {
+                showBtn.addEventListener('click', function() {
+                    pcModal.classList.remove('hidden');
+                });
+                closeBtn.addEventListener('click', function() {
+                    pcModal.classList.add('hidden');
+                });
+                // Optional: close modal when clicking outside the modal content
+                pcModal.addEventListener('click', function(e) {
+                    if (e.target === pcModal) {
+                        pcModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2025 at 12:46 PM
+-- Generation Time: May 16, 2025 at 06:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,11 +59,11 @@ CREATE TABLE `announcement` (
 --
 
 INSERT INTO `announcement` (`ID`, `TITLE`, `CONTENT`, `CREATED_DATE`, `CREATED_BY`) VALUES
-(5, '', 'GM', '2025-05-08', 'ADMIN'),
 (6, '', 'gm', '2025-05-08', 'ADMIN'),
 (7, '', 'gm', '2025-05-13', 'ADMIN'),
 (8, '', 'test\r\n', '2025-05-13', 'ADMIN'),
-(9, '', 'test again\r\n', '2025-05-14', 'ADMIN');
+(9, '', 'test again\r\n', '2025-05-14', 'ADMIN'),
+(10, '', 'final test', '2025-05-16', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,8 @@ INSERT INTO `computer` (`ID`, `LABORATORY`, `PC_NUM`, `STATUS`) VALUES
 (33, 'lab517', 1, 'available'),
 (34, 'lab524', 1, 'available'),
 (35, 'lab524', 1, 'used'),
-(36, 'lab524', 1, 'available');
+(36, 'lab524', 1, 'available'),
+(37, 'lab517', 1, 'used');
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,8 @@ INSERT INTO `curr_sitin` (`SITIN_ID`, `IDNO`, `FULL_NAME`, `PURPOSE`, `LABORATOR
 (24, 2000, 'hamela sala', 'Project Management', 'Lab 524', '19:37:00', '20:40:21', '2025-05-13', 'Completed'),
 (25, 2000, 'hamela sala', 'C Programming', 'Lab 544', '22:12:00', '17:57:00', '2025-05-13', 'Completed'),
 (26, 1000, 'Jana Zamoro', 'C++ Programming', 'Lab 528', '00:00:00', '18:07:41', '2025-05-14', 'Completed'),
-(27, 7000, 'erica  juarez', 'Project Management', 'Lab 517', '17:45:00', '18:07:38', '2025-05-14', 'Completed');
+(27, 7000, 'erica  juarez', 'Project Management', 'Lab 517', '17:45:00', '18:07:38', '2025-05-14', 'Completed'),
+(28, 3000, 'Nadine Lopez', 'C Programming', 'Lab 517', '01:01:58', NULL, '2025-05-16', 'Active');
 
 -- --------------------------------------------------------
 
@@ -163,7 +165,8 @@ CREATE TABLE `feedback` (
 INSERT INTO `feedback` (`FEEDBACK_ID`, `IDNO`, `LABORATORY`, `DATE`, `FEEDBACK`, `RATING`) VALUES
 (1, 2000, 'Lab 524', '2025-05-13', 'nice', 5),
 (3, 7000, 'Lab 517', '2025-05-14', 'niceeeee', 5),
-(4, 1000, 'Lab 528', '2025-05-14', 'eyyyy', 5);
+(4, 1000, 'Lab 528', '2025-05-14', 'eyyyy', 5),
+(5, 2000, 'Lab 544', '2025-05-16', 'eyyy', 5);
 
 -- --------------------------------------------------------
 
@@ -215,16 +218,6 @@ INSERT INTO `notification` (`NOTIF_ID`, `USER_ID`, `RESERVATION_ID`, `ANNOUNCEME
 (1, 5, 10, NULL, 'New reservation from Jana Zamoro for 517 on 2025-05-08', 1, '2025-05-07 20:21:55'),
 (2, NULL, 10, NULL, 'Jana Zamoro (1st Year) has requested a reservation for 517 on 2025-05-08 at 04:21 for Web Design & Development.', 1, '2025-05-07 20:21:55'),
 (3, 5, 10, NULL, 'Your reservation for 517 has been approved', 1, '2025-05-07 20:22:24'),
-(4, 5, NULL, 5, 'Admin posted a new announcement', 1, '2025-05-07 20:59:11'),
-(6, 7, NULL, 5, 'Admin posted a new announcement', 1, '2025-05-07 20:59:11'),
-(7, 9, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(8, 10, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(9, 11, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(10, 12, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(11, 13, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(12, 14, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(13, 15, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
-(14, 16, NULL, 5, 'Admin posted a new announcement', 0, '2025-05-07 20:59:11'),
 (19, 5, NULL, 6, 'Admin posted a new announcement', 1, '2025-05-07 21:06:56'),
 (21, 7, NULL, 6, 'Admin posted a new announcement', 1, '2025-05-07 21:06:56'),
 (22, 9, NULL, 6, 'Admin posted a new announcement', 0, '2025-05-07 21:06:56'),
@@ -298,8 +291,26 @@ INSERT INTO `notification` (`NOTIF_ID`, `USER_ID`, `RESERVATION_ID`, `ANNOUNCEME
 (100, 14, NULL, 9, 'Admin posted a new announcement', 1, '2025-05-14 10:10:20'),
 (101, 15, NULL, 9, 'Admin posted a new announcement', 0, '2025-05-14 10:10:20'),
 (102, 16, NULL, 9, 'Admin posted a new announcement', 0, '2025-05-14 10:10:20'),
-(108, 5, 53, NULL, 'New reservation from Jana Zamoro for 530 on 2025-05-14', 0, '2025-05-14 10:44:41'),
-(109, NULL, 53, NULL, 'Jana Zamoro (1st Year) has requested a reservation for 530 on 2025-05-14 at 18:44 for Embedded System & IOT.', 0, '2025-05-14 10:44:41');
+(108, 5, 53, NULL, 'New reservation from Jana Zamoro for 530 on 2025-05-14', 1, '2025-05-14 10:44:41'),
+(109, NULL, 53, NULL, 'Jana Zamoro (1st Year) has requested a reservation for 530 on 2025-05-14 at 18:44 for Embedded System & IOT.', 1, '2025-05-14 10:44:41'),
+(110, 5, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(111, 7, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(112, 9, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(113, 10, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(114, 11, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(115, 12, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(116, 13, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(117, 14, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(118, 15, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(119, 16, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(120, 17, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(121, 18, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(122, 19, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(123, 20, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(124, 21, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(125, 22, NULL, 10, 'Admin posted a new announcement', 0, '2025-05-16 03:06:10'),
+(141, 17, 54, NULL, 'New reservation from Nadine Lopez for 517 on 2025-05-16', 0, '2025-05-16 03:07:55'),
+(142, NULL, 54, NULL, 'Nadine Lopez (4th Year) has requested a reservation for 517 on 2025-05-16 at 11:07 for C Programming.', 0, '2025-05-16 03:07:55');
 
 -- --------------------------------------------------------
 
@@ -339,7 +350,8 @@ INSERT INTO `reservation` (`ID`, `IDNO`, `FULL_NAME`, `COURSE`, `YEAR_LEVEL`, `P
 (50, 2000, 'hamela sala', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'C Programming', '544', 1, '2025-05-13', '22:12:00', '00:00:00', 'Approved'),
 (51, 1000, 'Jana Zamoro', 'BS IN COMPUTER SCIENCE', '1st Year', 'C++ Programming', '528', 1, '2025-05-14', '00:00:00', '00:00:00', 'Approved'),
 (52, 7000, 'erica  juarez', 'BACHELOR OF ELEMENTARY EDUCATI', '4th Year', 'Project Management', '517', 1, '2025-05-14', '17:45:00', '00:00:00', 'Approved'),
-(53, 1000, 'Jana Zamoro', 'BS IN COMPUTER SCIENCE', '1st Year', 'Embedded System & IOT', '530', 1, '2025-05-14', '18:44:00', '00:00:00', 'Pending');
+(53, 1000, 'Jana Zamoro', 'BS IN COMPUTER SCIENCE', '1st Year', 'Embedded System & IOT', '530', 1, '2025-05-14', '18:44:00', '00:00:00', 'Pending'),
+(54, 3000, 'Nadine Lopez', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'C Programming', '517', 2, '2025-05-16', '11:07:00', '00:00:00', 'Pending');
 
 --
 -- Triggers `reservation`
@@ -455,7 +467,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`STUD_NUM`, `IDNO`, `LAST_NAME`, `FIRST_NAME`, `MID_NAME`, `COURSE`, `YEAR_LEVEL`, `USER_NAME`, `PASSWORD_HASH`, `UPLOAD_IMAGE`, `EMAIL`, `ADDRESS`, `SESSION`, `POINTS`, `TOTAL_POINTS`) VALUES
 (5, 1000, 'Zamoro', 'Jana', 'A', 'BS IN COMPUTER SCIENCE', '1st Year', 'jana', '$2y$10$ATMUh4nr/14WBLYThS5xOeAec6IxQkauU2GniAlLQKaBO/NnnjImS', 0x363832333135616161653935665f363765323266316633383166305f363764643861353763303132365f6d656f772e6a7067, 'jana@gmail.com', 'guadalupe', 30, 0, 10),
-(7, 2000, 'sala', 'hamela', 'S', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'sala', '$2y$10$kkEznklT.Mwb6wLiXrB7Y.GGq6pab/LXRbNY4/5/C7.w6s/CEPUMy', 0x363832333266303133346366645f363830313031323737373065335f363764643861353763303132365f6d656f772e6a7067, 'sala@gmail.com', 'Labangon', 26, 0, 6),
+(7, 2000, 'sala', 'hamela', 'S', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'sala', '$2y$10$kkEznklT.Mwb6wLiXrB7Y.GGq6pab/LXRbNY4/5/C7.w6s/CEPUMy', 0x363832363134303431306638385f6361742e6a7067, 'sala@gmail.com', 'Labangon', 26, 0, 6),
 (9, 4000, 'arias', 'irizcel', 'I', 'BS IN ACCOUNTANCY', '4th Year', 'arias', '$2y$10$U.8vA.puO7UGFqT6csMkhOptlppGeUO84Jpqo06428L0sz6K89cC6', 0x696d6167652e6a7067, '', '', 30, 0, 0),
 (10, 4000, 'arias', 'irizcel', 'I', 'BS IN ACCOUNTANCY', '4th Year', 'arias', '$2y$10$KrR1gBJjDHf43zpAEe7BL.YV4L.Cv/KuehWqlAajuBFVut/HvGWly', 0x696d6167652e6a7067, '', '', 30, 0, 0),
 (11, 12345678, 'cruz', 'donjee', 'Q', 'BS IN BUSINESS ADMINISTRATION', '2nd Year', 'donjee', '$2y$10$RUFAF0F3SzU6AH6qDwZs.uMl7w48yzq/lJ7qFeG8XC.RU37LvKLwe', 0x696d6167652e6a7067, '', '', 30, 0, 0),
@@ -464,10 +476,12 @@ INSERT INTO `users` (`STUD_NUM`, `IDNO`, `LAST_NAME`, `FIRST_NAME`, `MID_NAME`, 
 (14, 9000, 'doe', 'jane', 'B', 'BS IN CRIMINOLOGY', '1st Year', 'doe', '$2y$10$aSE6IGtsSESHAKQFxZqQJunTkEC27UpaaskcfFYkrDzNKS64Jsva6', 0x696d6167652e6a7067, '', '', 30, 0, 0),
 (15, 1100, 'Johnson', 'Micheal', 'B', 'BS IN COMPUTER SCIENCE', '4th Year', 'johnson', '$2y$10$K5beIg3VkRw.6lLmYGZcseeVoybxOXAaetsc5olc10QJNMzMpV09i', 0x696d6167652e6a7067, '', '', 30, 0, 0),
 (16, 1110, 'Davis', 'Emily', 'D', 'BS IN BUSINESS ADMINISTRATION', '2nd Year', 'emily', '$2y$10$9iKfX3.BmWyswx4E/QrzzezfLoLsF2whqt/UKZ4vmGsYbq3g0WAmO', 0x696d6167652e6a7067, '', '', 30, 0, 0),
-(17, 3000, 'Lopez', 'Nadine', 'R', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'nadine', '$2y$10$RWFayGFq7kRcXR2r2le.peqMy/lYsS7bDJeJiAemQj9PUzqdrq9s2', 0x363832343730653461303036385f363764663861393632366239325f363764643861353763303132365f6d656f772e6a7067, 'nadine@gmail.com', 'Cebu CIty', 30, 0, 0),
-(18, 5000, 'mier', 'zaira', 'm', 'BS IN ACCOUNTANCY', '2nd Year', 'mier', '$2y$10$OpT1RLNd.DZ47BtGMY748uOJfOKmyMTbyUpL0w3ajds5mtAZJhPJC', 0x696d6167652e6a7067, '', '', 30, 0, 0),
+(17, 3000, 'Lopez', 'Nadine', 'R', 'BS IN INFORMATION TECHNOLOGY', '4th Year', 'nadine', '$2y$10$RWFayGFq7kRcXR2r2le.peqMy/lYsS7bDJeJiAemQj9PUzqdrq9s2', 0x363832343737393138663664355f636174322e6a7067, 'nadine@gmail.com', 'Cebu CIty', 30, 2, 0),
+(18, 5000, 'mier', 'zaira', 'm', 'BS IN ACCOUNTANCY', '2nd Year', 'mier', '$2y$10$OpT1RLNd.DZ47BtGMY748uOJfOKmyMTbyUpL0w3ajds5mtAZJhPJC', 0x363832343737373338386639645f6361742e6a7067, 'mier@gmail.com', 'Banawa', 30, 0, 0),
 (19, 1010, 'doe', 'john', 'J', 'BS IN CRIMINOLOGY', '1st Year', 'doe', '$2y$10$wxYLLlWY7t5zGGFw1Isam.TmkMS03m0dVfIJ0xPsYDdUG2.TkTgxi', 0x696d6167652e6a7067, '', '', 30, 0, 0),
-(20, 1010, 'doe', 'john', 'J', 'BS IN CRIMINOLOGY', '1st Year', 'doe', '$2y$10$Wauzc5QkEHLhrDoujz2TX.1O8lfs56iHVd7S4uN6EicLW9tVoW5pK', 0x696d6167652e6a7067, '', '', 30, 0, 0);
+(20, 1010, 'doe', 'john', 'J', 'BS IN CRIMINOLOGY', '1st Year', 'doe', '$2y$10$Wauzc5QkEHLhrDoujz2TX.1O8lfs56iHVd7S4uN6EicLW9tVoW5pK', 0x696d6167652e6a7067, '', '', 30, 0, 0),
+(21, 1210, 'awd', 'awd', 'awd', 'BS IN CUSTOMS ADMINISTRATION', '2nd Year', 'awd', '$2y$10$JCEYElJAUiUaYNpQX7WIH.nF1QzQ6Uo4af0yEQO47NEIBnLs79p..', 0x363832363133616231653865625f636174322e6a7067, 'awd@gmail.com', 'awd', 30, 0, 0),
+(22, 52102255, 'test', 'testing', 't', '', '2nd Year', 'test', '$2y$10$ZpQr3SmwOxU1vNyXBtNKeOuRN9uhm7IQR6Dqi4Ig8r8mKq2Ro1bIi', NULL, '', '', 30, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -556,25 +570,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `computer`
 --
 ALTER TABLE `computer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `curr_sitin`
 --
 ALTER TABLE `curr_sitin`
-  MODIFY `SITIN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `SITIN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `FEEDBACK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `FEEDBACK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lab_schedule`
@@ -586,13 +600,13 @@ ALTER TABLE `lab_schedule`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `NOTIF_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `NOTIF_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `reservation_logs`
@@ -610,7 +624,7 @@ ALTER TABLE `resources`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `STUD_NUM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `STUD_NUM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables

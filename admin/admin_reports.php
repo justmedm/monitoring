@@ -218,9 +218,7 @@ $result = $stmt->get_result();
     <div class="container mx-auto px-4 mt-8">
         <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
         <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
-             style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+             style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%)">
                 <h2 class="text-xl font-bold tracking-wider uppercase relative z-10">Generate Reports</h2>
             </div>
 
@@ -353,7 +351,7 @@ $result = $stmt->get_result();
 
                 <div class="overflow-x-auto">
                     <table id="reportsTable" class="min-w-full">
-                    <thead style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);" class="text-white">
+                    <thead style="background: linear-gradient(135deg, #2563eb 100%, #3b82f6 100%);" class="text-white">
                             <tr>
                                 <th class="px-6 py-3 text-left">ID Number</th>
                                 <th class="px-6 py-3 text-left">Name</th>

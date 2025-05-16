@@ -345,27 +345,32 @@ if (isset($_SESSION['toast'])) {
     </style>
 </head>
 <body class="min-h-screen font-poppins" style="background: white">
-    <div class="bg-gradient-to-r from-[#4066E0] to-[#4D6AFF] text-white shadow-lg">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
+                <!-- Left - System Title with Logo -->
                 <div class="flex items-center space-x-4">
                     <img src="../logo/ccs.png" alt="Logo" class="w-10 h-10">
                     <h1 class="font-bold text-xl">CCS SIT-IN MONITORING SYSTEM</h1>
                 </div>
+
+                <!-- Center/Right - Navigation Menu -->
                 <nav class="flex items-center space-x-6">
                     <a href="admin_dashboard.php" class="nav-item">
                         <span>Home</span>
                     </a>
-                    <a href="admin_search.php" class="nav-item">
+                    <a href="admin_search.php" class="nav-item active">
+                       
                         <span>Search</span>
                     </a>
                     <a href="admin_sitin.php" class="nav-item">
                         <span>Sit-in</span>
                     </a>
+                    <!-- View Dropdown -->
                     <div class="relative group">
                         <button class="nav-item">
                             <span>View</span>
-                            <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_sitinrec.php" class="dropdown-item">
@@ -379,10 +384,11 @@ if (isset($_SESSION['toast'])) {
                             </a>
                         </div>
                     </div>
+
+                    <!-- Lab Dropdown -->
                     <div class="relative group">
                         <button class="nav-item">
                             <span>Lab</span>
-                            <i class="ri-arrow-down-s-line"></i>
                         </button>
                         <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 hidden group-hover:block">
                             <a href="admin_resources.php" class="dropdown-item">
@@ -396,10 +402,11 @@ if (isset($_SESSION['toast'])) {
                             </a>
                         </div>
                     </div>
+
                     <a href="admin_reports.php" class="nav-item">
                         <span>Reports</span>
                     </a>
-                    <a href="admin_reservation.php" class="nav-item active">
+                    <a href="admin_reservation.php" class="nav-item">
                         <span>Reservation</span>
                     </a>
                     <a href="../logout.php" class="nav-item hover:bg-red-500/20">
@@ -461,24 +468,24 @@ if (isset($_SESSION['toast'])) {
                         </div>
                         <div class="grid grid-cols-2 gap-4 mt-6">
                             <button onclick="setStatus('available')" class="bg-gradient-to-r from-[#4066E0] to-[#4D6AFF] hover:from-[#3055CF] hover:to-[#3C59EE] text-white font-medium py-3 px-6 rounded-xl transition-all duration-300">
-                                <i class="fas fa-check-circle mr-2"></i> Available
+                                 Available
                             </button>
                             <button onclick="setStatus('used')" class="bg-gradient-to-r from-[#4066E0] to-[#4D6AFF] hover:from-[#3055CF] hover:to-[#3C59EE] text-white font-medium py-3 px-6 rounded-xl transition-all duration-300">
-                                <i class="fas fa-times-circle mr-2"></i> Used
+                                 Used
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl overflow-hidden backdrop-blur-sm border border-white/30">
                     <div class="text-white p-4 flex items-center justify-center relative overflow-hidden" 
-                         style="background: linear-gradient(135deg, #4066E0 0%, #4D6AFF 100%)">
+                         style="background: linear-gradient(135deg, #4066E0 100%, #4D6AFF 100%)">
                         <h2 class="text-xl font-bold tracking-wider uppercase">Reservation Request</h2>
                         <button 
                             x-data 
                             @click="$dispatch('open-logs-modal')" 
                             class="absolute right-4 bg-white/10 hover:bg-white/20 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 flex items-center gap-2"
                         >
-                            <i class="ri-file-list-line"></i> View Logs
+                            View Logs
                         </button>
                     </div>
                     <div class="p-6">
@@ -527,14 +534,14 @@ if (isset($_SESSION['toast'])) {
                                                     <input type="hidden" name="reservation_id" value="<?php echo $row['ID']; ?>">
                                                     <input type="hidden" name="action" value="approve">
                                                     <button type="submit" class="w-full bg-gradient-to-r from-[#4066E0] to-[#4D6AFF] hover:from-[#3055CF] hover:to-[#3C59EE] text-white font-medium py-2 px-4 rounded-lg transition-all duration-300">
-                                                        <i class="fas fa-check mr-2"></i> Approve
+                                                         Approve
                                                     </button>
                                                 </form>
                                                 <form method="POST" class="flex-1">
                                                     <input type="hidden" name="reservation_id" value="<?php echo $row['ID']; ?>">
                                                     <input type="hidden" name="action" value="disapprove">
                                                     <button type="submit" class="w-full bg-gradient-to-r from-[#4066E0] to-[#4D6AFF] hover:from-[#3055CF] hover:to-[#3C59EE] text-white font-medium py-2 px-4 rounded-lg transition-all duration-300">
-                                                        <i class="fas fa-times mr-2"></i> Disapprove
+                                                         Disapprove
                                                     </button>
                                                 </form>
                                             </div>
